@@ -1,0 +1,10 @@
+.Xil
+*.bin
+*.bit
+*clockInfo.txt
+*impl_netlist.edif
+*impl_netlist.v
+*.dcp
+*.rpt
+*.jou
+*.log
