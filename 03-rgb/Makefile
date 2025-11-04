@@ -19,7 +19,7 @@ $(REPORTS) $(NETLISTS) $(BITFILES): $(SVFILES) synth.tcl design.xdc ./output/
 ./output/:
 	mkdir output
 
-program: $(BITFILES)
+program: 
 	vivado -mode batch -source prog.tcl
 
 ./output/tb.vcd: ./xsim.dir/rgb_controller_tb.simsnap/ ./output/

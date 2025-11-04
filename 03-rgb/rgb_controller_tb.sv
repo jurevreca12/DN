@@ -1,6 +1,3 @@
-// `timescale 1ns / 1ps
-// `include "rgb_controller.sv" 
-
 module rgb_controller_tb;
 
     // Declare testbench signals
@@ -18,6 +15,19 @@ module rgb_controller_tb;
     );
 
     integer i;
+		logic [5:0] sw_vals[11] = '{
+			6'b00_00_00,
+			6'b00_00_01,
+			6'b00_00_10,
+			6'b00_00_11,
+			6'b00_01_00,
+			6'b00_10_00,
+			6'b00_11_00,
+			6'b01_00_00,
+			6'b10_00_00,
+			6'b11_00_00,
+			6'b11_11_11
+		};
     // Parameters
     localparam CL = 10; // Clock period in ns
 
@@ -33,34 +43,13 @@ module rgb_controller_tb;
         $dumpvars;
         // Initialize signals
         reset = 1;
-
-        #(CL*2);
+				repeat (2) @(posedge clock);
         reset = 0;
 
-        for (i = 0; i < 32*3125; i=i+1) 
-        begin
-            SW = 6'b000001;
-            #((CL)); 
-        end
-
-        for (i = 0; i < 32*3125; i=i+1) 
-        begin
-            SW = 6'b001000;
-            #((CL)); 
-        end
-        
-        for (i = 0; i < 32*3125; i=i+1) 
-        begin
-            SW = 6'b110000;
-            #((CL)); 
-        end
-
-        for (i = 0; i < 32*3125; i=i+1) 
-        begin
-            SW = 6'b110110;
-            #((CL)); 
-        end
-
+				for (i = 0; i < 11; i=i+1) begin
+        		SW = sw_vals[i];
+						repeat(16 * 3125) @(posedge clock);
+				end
         $finish;
     end
 

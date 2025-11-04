@@ -4,7 +4,6 @@
 #
 #set_part xc7a750tcsg324-1
 set_part xc7a100tcsg324-1
-read_verilog counter.sv
 read_verilog prescaler.sv
 read_verilog pwm_controller.sv
 read_verilog rgb_controller.sv

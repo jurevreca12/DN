@@ -30,21 +30,16 @@ module prescaler
 
     logic [PRESCALER_WIDTH-1:0] count;
 
-    always_ff @( posedge clock) begin 
-        if (reset) begin
-            count <= 0;
-            clock_enable <= 0;
-        end
+    always_ff @(posedge clock) begin 
+        if (reset) 
+            count <= '0;
         else begin
-            if (count == limit-1) begin
-                count <= 0;
-                clock_enable <= ~clock_enable;
-            end
-            else begin
-                clock_enable <= 0;
-                count <= count + 1;
-            end
+            if (count == limit-1) 
+                count <= '0;
+            else
+                count <= count + 1'b1;
         end
     end
 
+		assign clock_enable = (count == limit-1);
 endmodule
