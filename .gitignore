@@ -8,3 +8,7 @@
 *.rpt
 *.jou
 *.log
+*/output/*
+*xelab.pb
+*xvlog.pb
+*/xsim.dir/*
