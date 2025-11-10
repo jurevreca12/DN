@@ -17,7 +17,7 @@ module top (
 	SevSegDisplay ssd (
 		.clock        (clock),
 		.reset        (reset),
-		.digit1       (count[3:0]),
+		.digits       (count),
 		.anode_select (anode_assert),
 		.segs         (segs)
 	);
