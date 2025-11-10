@@ -8,7 +8,7 @@ REPORTS = ./output/post_synth_power.rpt \
 NETLISTS = ./output/impl_netlist.v ./output/impl_netlist.edif
 BITFILES = ./output/impl.bin ./output/impl.bit
 
-SVFILES   = $(shell find -name "*.sv" -exec basename \{} \;)
+SVFILES   = rgb_controller.sv rgb_controller_tb.sv pwm_controller.sv prescaler.sv #$(shell find -name "*.sv" -exec basename \{} \;)
 SDBFILESX = $(SVFILES:%=./xsim.dir/work/%)
 SDBFILES  = $(SDBFILESX:.sv=.sdb)
 MODULES   = $(SVFILES:.sv=)
