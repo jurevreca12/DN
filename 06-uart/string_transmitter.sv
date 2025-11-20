@@ -8,7 +8,7 @@ module string_transmitter(
 
     logic [7:0] char_data [13:0];
  		logic [3:0] char_cnt; 
-		logic tx_start, tx_start_r, tx_done;
+		logic tx_start, tx_start_r, tx_done, tx_done_r;
 		logic start, finish;
 
 		// initalize array 
@@ -34,7 +34,7 @@ module string_transmitter(
 		        IDLE,
 		        SEND
 		} state_sender_t;	
-		state_sender_t state, state_next;
+			state_sender_t state, state_next;
 
 		transmitter_system uart_tx (
 			.clock    (clock),
@@ -45,8 +45,15 @@ module string_transmitter(
 			.tx_done  (tx_done)
 		);
 
+		always_ff @(posedge clock) begin
+			if (reset)
+				tx_done_r <= 1'b0;
+			else
+				tx_done_r <= tx_done;
+		end
+
 		assign tx_start = (((state == IDLE) && start) || 
-											((state == SEND) && tx_done && ~finish));
+											 ((state == SEND) && tx_done_r && ~finish));
 		always_ff @(posedge clock) begin
 			if (reset)
 				tx_start_r <= 1'b0;
